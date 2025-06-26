@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tinker Tutor: Robotics</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #41aff8;
+            --secondary: #fb873f;
+            --accent: #0ed44c;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --gradient-start: #e74c3c;
+            --gradient-end: #c0392b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,117.3C96,107,192,85,288,96C384,107,480,149,576,149.3C672,149,768,107,864,101.3C960,96,1056,128,1152,138.7C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center bottom;
+            opacity: 0.2;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+        
+        /* Course Info Cards */
+        .info-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: -40px auto 50px;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 25px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 10;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .info-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Learning Cards */
+        .learning-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .learning-card {
+            background: linear-gradient(135deg, #f8faff, #e6f0ff);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .learning-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .learning-card i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Curriculum */
+        .curriculum {
+            background: #f9fbfd;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .module {
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .module-header {
+            padding: 20px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .module-header:hover {
+            background: #f5f9ff;
+        }
+        
+        .module-header h4 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .module-header i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .module-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .lesson {
+            padding: 15px 0 15px 40px;
+            border-bottom: 1px dashed #eaeaea;
+        }
+        
+        .lesson:last-child {
+            border-bottom: none;
+        }
+        
+        .lesson i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+        
+        /* Projects Showcase */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-img {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        /* Pricing Card */
+        .pricing-card {
+            background: linear-gradient(135deg, var(--primary), #c0392b);
+            border-radius: 20px;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(192, 57, 43, 0.3);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .features-list {
+            text-align: left;
+            margin: 25px 0;
+            padding-left: 20px;
+        }
+        
+        .features-list li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .testimonial {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            border: 1px solid #eaeaea;
+        }
+        
+        .student-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(251, 135, 63, 0.3);
+        }
+        
+        .btn:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(251, 135, 63, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            box-shadow: 0 5px 15px rgba(65, 175, 248, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: #3498db;
+            box-shadow: 0 8px 20px rgba(65, 175, 248, 0.4);
+        }
+        
+        /* Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .info-cards {
+                margin-top: -20px;
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1>Robotics</h1>
+            <p>Design, build, and program robots with hands-on projects designed for school students</p>
+            <div class="header-buttons">
+            </div>
+        </div>
+    </header>
+    
+    <!-- Info Cards -->
+    <div class="info-cards">
+        <div class="info-card floating">
+            <i class="fas fa-clock"></i>
+            <h3>10 Weeks</h3>
+            <p>Flexible Learning</p>
+        </div>
+        
+        <div class="info-card floating" style="animation-delay: 0.5s;">
+            <i class="fas fa-book"></i>
+            <h3>12 Lessons</h3>
+            <p>Hands-on Projects</p>
+        </div>
+        
+        <div class="info-card floating" style="animation-delay: 1s;">
+            <i class="fas fa-user-graduate"></i>
+            <h3>Beginner Friendly</h3>
+            <p>No prior experience needed</p>
+        </div>
+        
+        <div class="info-card floating" style="animation-delay: 1.5s;">
+            <i class="fas fa-certificate"></i>
+            <h3>Certificate</h3>
+            <p>Upon Completion</p>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>About This Course</h2>
+                <p>Designed for school students to explore the exciting world of robotics</p>
+            </div>
+            
+            <div class="content">
+                <p style="font-size: 1.2rem; margin-bottom: 25px;">
+                    This comprehensive robotics course takes you from basic concepts to building and programming your own robots. You'll learn about mechanical design, electronic components, programming logic, and automation while creating real-world robotic projects.
+                </p>
+                
+                <div class="learning-cards">
+                    <div class="learning-card">
+                        <i class="fas fa-robot"></i>
+                        <h3>Hands-On Learning</h3>
+                        <p>Build actual robots with components we provide in our robotics kits.</p>
+                    </div>
+                    
+                    <div class="learning-card">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Real-World Projects</h3>
+                        <p>Create line-following robots, robotic arms, and autonomous vehicles.</p>
+                    </div>
+                    
+                    <div class="learning-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Peer Collaboration</h3>
+                        <p>Work with classmates on group projects and share ideas in our online community.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Curriculum Section -->
+        <section class="section" id="curriculum">
+            <div class="section-title">
+                <h2>What You'll Learn</h2>
+                <p>Step-by-step curriculum designed for young roboticists</p>
+            </div>
+            
+            <div class="curriculum">
+                <div class="module">
+                    <div class="module-header">
+                        <h4><i class="fas fa-play-circle"></i> Module 1: Robotics Basics</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <div class="lesson">
+                            <i class="fas fa-video"></i> Introduction to robotics and real-world applications
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-tasks"></i> Activity: Explore different types of robots
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <div class="module-header">
+                        <h4><i class="fas fa-microchip"></i> Module 2: Electronics Fundamentals</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <div class="lesson">
+                            <i class="fas fa-video"></i> Understanding circuits and components
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-code"></i> Working with sensors and actuators
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-project-diagram"></i> Project: Build a simple electronic circuit
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <div class="module-header">
+                        <h4><i class="fas fa-cogs"></i> Module 3: Mechanical Design</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <div class="lesson">
+                            <i class="fas fa-video"></i> Principles of mechanical movement
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-flask"></i> Experiment: Building chassis and structures
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-project-diagram"></i> Project: Design a robotic arm
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <div class="module-header">
+                        <h4><i class="fas fa-code"></i> Module 4: Robot Programming</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <div class="lesson">
+                            <i class="fas fa-video"></i> Introduction to robot programming
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-calculator"></i> Working with microcontrollers
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-project-diagram"></i> Project: Program a line-following robot
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <div class="module-header">
+                        <h4><i class="fas fa-brain"></i> Module 5: Autonomous Robots</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <div class="lesson">
+                            <i class="fas fa-video"></i> Creating decision-making robots
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-chart-line"></i> Working with multiple sensors
+                        </div>
+                        <div class="lesson">
+                            <i class="fas fa-project-diagram"></i> Project: Build an obstacle-avoiding robot
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Student Projects</h2>
+                <p>See what you'll build during this course</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Line-Following Robot</h3>
+                        <p>Build a robot that can autonomously follow a path using infrared sensors.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Robotic Arm</h3>
+                        <p>Create a programmable arm that can pick and place objects.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Obstacle-Avoiding Vehicle</h3>
+                        <p>Develop an autonomous vehicle that navigates around obstacles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section class="section">
+            <div class="section-title">
+                <h2>What Students Say</h2>
+                <p>Feedback from our young roboticists</p>
+            </div>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>"Building my first robot was an incredible experience! The course made complex concepts easy to understand."</p>
+                    <div class="student-info">
+                        <div class="student-avatar">TK</div>
+                        <div>
+                            <h4>Takshika </h4>
+                            <p>Grade 9, Smt Jamuna Mishra Academy</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"I never thought I could program a robot, but the step-by-step lessons made it possible!"</p>
+                    <div class="student-info">
+                        <div class="student-avatar">AA</div>
+                        <div>
+                            <h4>Aditya </h4>
+                            <p>Grade 10, Vidhyasharm Public School</p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        
+        <!-- Enrollment Section -->
+        <section class="section" id="enroll">
+            <div class="section-title">
+                <h2>Start Your Robotics Journey Today</h2>
+                <p>Join thousands of students learning with Tinker Tutor</p>
+            </div>
+            
+            <div class="pricing-card">
+                <h2>Robotics Course</h2>
+                <div class="price">₹999</div>
+                <p>Complete 10-week course with hands-on projects</p>
+                
+                <ul class="features-list">
+                    <li>50+ hours of video content</li>
+                    <li>4 real-world robotics projects</li>
+                    <li>Tinker Tutor Robotics Starter Kit (shipped to you)</li>
+                    <li>Weekly live Q&A sessions</li>
+                    <li>Certificate of completion</li>
+                    <li>Access to student community</li>
+                    <li>24/7 mentor support</li>
+                </ul>
+                
+                <a href="https://forms.gle/uDs7y8nNDDCBVmM77" target="_blank" class="btn btn-success w-100 py-3">
+                    Enroll now
+                </a>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.module-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.fa-chevron-down');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.section, .project-card, .testimonial').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

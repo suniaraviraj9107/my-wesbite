@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tinker Tutor: Gallery</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/icon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .gallery-section {
+            padding: 80px 0;
+        }
+        
+        .gallery-filter {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #41aff8;
+            color: #41aff8;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: #41aff8;
+            color: white;
+        }
+        
+        .gallery-item {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            padding: 20px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .school-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            transition: color 0.3s;
+        }
+        
+        .school-name:hover {
+            color: #41aff8;
+        }
+        
+        .workshop-type {
+            color: #41aff8;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .workshop-date {
+            color: #6c757d;
+            font-size: 13px;
+        }
+        
+        .view-more-btn {
+            background: #41aff8;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 30px;
+        }
+        
+        .view-more-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h1 {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .section-title p {
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Workshop Modal Styles */
+        .workshop-modal .modal-dialog {
+            max-width: 900px;
+        }
+        
+        .workshop-modal .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .workshop-modal .modal-header {
+            border-bottom: none;
+            padding-bottom: 0;
+            position: relative;
+        }
+        
+        .workshop-modal .modal-header .btn-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 10;
+            background-color: white;
+            opacity: 1;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        .workshop-modal .modal-body {
+            padding: 0;
+        }
+        
+        .workshop-gallery {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .workshop-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .workshop-details {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .workshop-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .workshop-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            color: #6c757d;
+        }
+        
+        .meta-item i {
+            margin-right: 8px;
+            color: #41aff8;
+        }
+        
+        .workshop-description {
+            color: #555;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+        
+        .participants-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .participants-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .participants {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .participant-badge {
+            background: #41aff8;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+ <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <p class="m-0 fw-bold" style="font-size: 25px;"><img src="img/icon.png" alt="" height="50px">Tinker<span style="color: #41aff8;">Tutor</span></p>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="index.html" class="nav-item nav-link active text-black">Home</a>
+            <a href="school.html" class="nav-item nav-link text-black">School</a>
+            <a href="courses.html" class="nav-item nav-link text-black">Courses</a>
+            <a href="event.html" class="nav-item nav-link text-black">Event</a>
+            <a href="about.html" class="nav-item nav-link text-black">About</a>
+            <a href="contact.html" class="nav-item nav-link text-black">Contact</a>
+            <a href="#" class="nav-item nav-link text-black">
+                <div id="google_translate_element"></div>
+            </a>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">Our Gallery</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Gallery</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+<!-- Gallery Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="section-title text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Workshops</h6>
+            <h1 class="mb-3">Schools We've Worked With</h1>
+            <p>Explore our journey through various schools where we've conducted Robotics and IoT workshops</p>
+        <div class="row gallery-container wow fadeInUp" data-wow-delay="0.5s">
+            <!-- School 1 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="robotics">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal1">
+                    <img src="img/gallery/school11.jpg" class="gallery-img" alt="Delhi Public School Workshop">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal1">
+                    <h5 class="school-name">Kids Garden Sr. Sec. School, Pilani.</h5>
+                    <span class="workshop-type">Robotics Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>1st-5th July 2024</span>
+                </div>
+            </div>
+            
+            <!-- School 2 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="iot">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal2">
+                    <img src="img/gallery/school21.jpg" class="gallery-img" alt="Kendriya Vidyalaya Workshop">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal2">
+                    <h5 class="school-name">Vidhyashram Sr. Sec. School, Pilani.</h5>
+                    <span class="workshop-type">IoT Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>23rd-29th July 2024</span>
+                </div>
+            </div>
+            
+            <!-- School 3 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="drone">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal3">
+                    <img src="img/gallery/school31.jpg" class="gallery-img" alt="Modern School Workshop">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal3">
+                    <h5 class="school-name">Durga Public Sr. Sec. School, Pilani.</h5>
+                    <span class="workshop-type">IoT Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>5th -12th August 2024</span>
+                </div>
+            </div>
+            
+            <!-- School 4 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="robotics">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal4">
+                    <img src="img/gallery/school41.jpg" class="gallery-img" alt="Sanskriti School Workshop">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal4">
+                    <h5 class="school-name">Smt Jamuna Mishra Academy , Pilani.</h5>
+                    <span class="workshop-type">Robotics and War Bots Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>17th August 2024</span>
+                </div>
+            </div>
+            
+            <!-- School 5 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="iot">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal5">
+                    <img src="img/gallery/school51.jpg" class="gallery-img" alt="DAV Public School Workshop">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal5">
+                    <h5 class="school-name">Hemant Children Academy.</h5>
+                    <span class="workshop-type">IoT & Html and Css Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>27th August 2024</span>
+                </div>
+            </div>
+
+            <!-- School 6 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="iot">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal6">
+                    <img src="img/gallery/school61.png" class="gallery-img" alt="Smt Janki Devi Mandelia School, Pilani.">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal6">
+                    <h5 class="school-name">Smt Janki Devi Mandelia School, Pilani.</h5>
+                    <span class="workshop-type">Robotics Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>31 August 2024</span>
+                </div>
+            </div>
+            
+            <!-- School 7 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="iot">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal7">
+                    <img src="img/gallery/school71.jpg" class="gallery-img" alt="Adarsh Vidya Niketan Sr.Sec.School, Pilani">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal7">
+                    <h5 class="school-name">Adarsh Vidya Niketan Sr.Sec.School, Pilani.</h5>
+                    <span class="workshop-type">Robotics Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>3rd September 2024</span>
+                </div>
+            </div>
+            
+            <!-- School 8 -->
+            <div class="col-lg-4 col-md-6 gallery-item" data-category="iot">
+                <div class="gallery-img-container" data-bs-toggle="modal" data-bs-target="#workshopModal8">
+                    <img src="img/gallery/school81.jpg" class="gallery-img" alt="Lohiya Public Sr.Sec.School,Chirawa">
+                </div>
+                <div class="gallery-caption" data-bs-toggle="modal" data-bs-target="#workshopModal8">
+                    <h5 class="school-name">Lohiya Public Sr.Sec.School,Chirawa.</h5>
+                    <span class="workshop-type">Robotics Workshop</span>
+                    <span class="workshop-date"><i class="far fa-calendar-alt me-2"></i>22nd November 2024</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Gallery End -->
+
+<!-- Workshop Modals -->
+<!-- Modal 1 -->
+<div class="modal fade workshop-modal" id="workshopModal1" tabindex="-1" aria-labelledby="workshopModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school11.jpg" class="d-block w-100 img-fluid" alt="Kids Garden Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school12.jpg" class="d-block w-100 img-fluid" alt="Kids Garden Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school13.jpg" class="d-block w-100 img-fluid" alt="Kids Garden Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">Robotics Workshop</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span> Kids Garden Sr. Sec. School, Pilani.</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>1st-5th July 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>50 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 9-12</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        Our robotics workshop at Kids Garden Sr. Sec. School, Pilani introduced students to the fundamentals of robotics, 
+                        including basic circuitry, sensor integration, and programming autonomous robots. Students built 
+                        and programmed their own robots to complete various challenges.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">Sensor</span>
+                            <span class="participant-badge">Arduino Programming</span>
+                            <span class="participant-badge">Sensor Integration</span>
+                            <span class="participant-badge">2 Hand 'on Project</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade workshop-modal" id="workshopModal2" tabindex="-1" aria-labelledby="workshopModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school21.jpg" class="d-block w-100 img-fluid" alt="Vidhyashram Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school22.jpg" class="d-block w-100 img-fluid" alt="Vidhyashram Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school23.jpg" class="d-block w-100 img-fluid" alt="Vidhyashram Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel2" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">IoT and Ai Workshop</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span>Vidhyashram Sr. Sec. School, Pilani.</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>23rd-29th July 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>60 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 9-12</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        The IoT workshop at Vidhyashram Sr. Sec. School, Pilani covered the basics of Internet of Things technology, 
+                        where students learned to connect sensors to the cloud, collect data, and control devices 
+                        remotely.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">Sensor Networks</span>
+                            <span class="participant-badge">Cloud Connectivity</span>
+                            <span class="participant-badge">Arduino Programming</span>
+                            <span class="participant-badge">Remote Control</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade workshop-modal" id="workshopModal3" tabindex="-1" aria-labelledby="workshopModalLabel3" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel3" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school31.jpg" class="d-block w-100 img-fluid" alt="Durga Public Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school32.jpg" class="d-block w-100 img-fluid" alt="Durga Public Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school33.jpg" class="d-block w-100 img-fluid" alt="Durga Public Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">Iot and Robotics.</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span>Durga Public Sr. Sec. School, Pilani</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>5th -12th August 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>40 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 9-12</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        Our IoT workshop at Durga Public Sr. Sec. School, Pilani introduced students to Robotics and IoT sensors. Students build 2 projects. based on real world.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">IoT Sensor</span>
+                            <span class="participant-badge">Arduino IDE</span>
+                            <span class="participant-badge">Robots</span>
+                            <span class="participant-badge">Hands ' on Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 4 -->
+<div class="modal fade workshop-modal" id="workshopModal4" tabindex="-1" aria-labelledby="workshopModalLabel4" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel4" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school41.jpg" class="d-block w-100 img-fluid" alt="Jamuna Mishra Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school42.jpg" class="d-block w-100 img-fluid" alt="Jamuna Mishra Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school43.jpg" class="d-block w-100 img-fluid" alt="Jamuna Mishra Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel4" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel4" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">Robotics Workshop</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span>Smt Jamuna Mishra Academy , Pilani</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>17th August 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>60 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 9</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        The advanced robotics workshop at Smt Jamuna Mishra Academy , Pilani covered complex robotics concepts including 
+                        computer vision, machine learning for robotics, and sensor fusion. Warbot was shown to Students.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">IoT</span>
+                            <span class="participant-badge">Robots</span>
+                            <span class="participant-badge">Ai</span>
+                            <span class="participant-badge">War Bot</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 5 -->
+<div class="modal fade workshop-modal" id="workshopModal5" tabindex="-1" aria-labelledby="workshopModalLabel5" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel5" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school51.jpg" class="d-block w-100 img-fluid" alt="Hemant Academy Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school52.jpg" class="d-block w-100 img-fluid" alt="Hemant Academy Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school53.jpg" class="d-block w-100 img-fluid" alt="Hemant Academy Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel5" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel5" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">Robotics and Web Design Workshop</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span>Hemant Children Academy</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>27th August 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>70 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 8-10</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        This workshop at Hemant Children Academy focused on robotics and coding to make web page. 
+                        Students get to know about the website building and robotics.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">Web Design</span>
+                            <span class="participant-badge">Coding</span>
+                            <span class="participant-badge">Ai</span>
+                            <span class="participant-badge">Robotics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 6 -->
+<div class="modal fade workshop-modal" id="workshopModal6" tabindex="-1" aria-labelledby="workshopModalLabel6" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel6" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school61.png" class="d-block w-100 img-fluid" alt="Janki Devi Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school62.jpg" class="d-block w-100 img-fluid" alt="Janki Devi Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school63.jpg" class="d-block w-100 img-fluid" alt="Janki Devi Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel6" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel6" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">Robotics and Web Design Workshop</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span>Smt Janki Devi Mandelia School, Pilani.</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>31st August 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>50 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 9-10</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        This workshop at Smt Janki Devi Mandelia School, Pilani focused on robotics and coding to make web page. 
+                        Students get to know about the website building and robotics.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">Web Design</span>
+                            <span class="participant-badge">Coding</span>
+                            <span class="participant-badge">Ai</span>
+                            <span class="participant-badge">Robotics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 7 -->
+<div class="modal fade workshop-modal" id="workshopModal7" tabindex="-1" aria-labelledby="workshopModalLabel7" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel7" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school71.jpg" class="d-block w-100 img-fluid" alt="Adarsh Vidya Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school72.jpg" class="d-block w-100 img-fluid" alt="Adarsh Vidya Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school73.jpg" class="d-block w-100 img-fluid" alt="Adarsh Vidya Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel7" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel7" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">Robotics and Iot Workshop</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span>Adarsh Vidya Niketan Sr.Sec.School, Pilani.</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>3rd September 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>50 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 9-10</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        This workshop at Adarsh Vidya Niketan Sr.Sec.School, Pilani focused on robotics and IoT. 
+                        Students get to know about the website building and robotics.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">IoT</span>
+                            <span class="participant-badge">Coding</span>
+                            <span class="participant-badge">Ai</span>
+                            <span class="participant-badge">Robotics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 8 -->
+<div class="modal fade workshop-modal" id="workshopModal8" tabindex="-1" aria-labelledby="workshopModalLabel8" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="workshop-gallery">
+                    <div id="carousel8" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner ratio ratio-16x9">
+                            <div class="carousel-item active">
+                                <img src="img/gallery/school81.jpg" class="d-block w-100 img-fluid" alt="Lohiya Public Workshop 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school82.jpg" class="d-block w-100 img-fluid" alt="Lohiya Public Workshop 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/gallery/school83.jpg" class="d-block w-100 img-fluid" alt="Lohiya Public Workshop 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel8" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel8" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="workshop-details p-4">
+                    <h3 class="workshop-title">Robotics and Web Design Workshop</h3>
+                    <div class="workshop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-school"></i>
+                            <span>Lohiya Public Sr.Sec.School,Chirawa.</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>22nd November 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>50 Participants</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Class 6-8</span>
+                        </div>
+                    </div>
+                    <p class="workshop-description">
+                        This workshop at Lohiya Public Sr.Sec.School,Chirawa focused on robotics and coding to make web page. 
+                        Students get to know about the website building and robotics.
+                    </p>
+                    <div class="participants-list">
+                        <h5 class="participants-title">Workshop Highlights</h5>
+                        <div class="participants">
+                            <span class="participant-badge">IoT</span>
+                            <span class="participant-badge">Coding</span>
+                            <span class="participant-badge">Arduino</span>
+                            <span class="participant-badge">Robotics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-8 mt-8 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-10">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <div class="d-flex flex-column">
+                        <a class="text-light mb-2" href="about.html">About Us</a>
+                        <a class="text-light mb-2" href="contact.html">Contact Us</a>
+                        <a class="text-light mb-2" href="">Privacy Policy</a>
+                        <a class="text-light mb-2" href="">Terms & Condition</a>
+                        <a class="text-light" href="">FAQs & Help</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <div class="d-flex flex-column">
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Near Rani Sati Mandir, Pilani, Rajasthan</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 6375829791</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>tinkertutoroffical@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social me-2" href="https://www.instagram.com/tinkertutor/"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social me-2" href="https://www.facebook.com/p/Tinker-Tutor-61564653234663/?locale=pt_BR"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social me-2" href="https://www.youtube.com/@TinkerTutor/shorts"><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tinkertutor/"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-white mb-3">Join the Tinker Tutor WhatsApp Group</h4>
+                    <p class="mb-3">Subscribe now and become part of the Tinker Tutor community — where young innovators learn robotics, IoT, and coding with hands-on projects!</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <a href="https://chat.whatsapp.com/KpPRurrJWpB00lA4tUWoMF" target="_blank" class="btn btn-success w-100 py-3">
+                            Join WhatsApp Group
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-12 text-center mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="index.html">Tinker Tutor</a>, All Right Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Gallery Filter Script -->
+    <script>
+        $(document).ready(function(){
+            // Filter gallery items
+            $('.filter-btn').click(function(){
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+                
+                var filterValue = $(this).attr('data-filter');
+                if(filterValue == 'all') {
+                    $('.gallery-item').show('1000');
+                } else {
+                    $('.gallery-item').not('[data-category="'+filterValue+'"]').hide('1000');
+                    $('.gallery-item[data-category="'+filterValue+'"]').show('1000');
+                }
+            });
+            
+            // Initialize lightbox
+            lightbox.option({
+                'resizeDuration': 200,
+                'wrapAround': true,
+                'albumLabel': "Image %1 of %2"
+            });
+            
+            // Make school names clickable to open modal
+            $('.school-name').click(function(e) {
+                e.stopPropagation();
+                var modalId = $(this).closest('.gallery-caption').attr('data-bs-target');
+                $(modalId).modal('show');
+            });
+        });
+    </script>
+</body>
+
+</html>
